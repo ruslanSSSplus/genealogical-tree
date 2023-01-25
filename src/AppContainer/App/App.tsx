@@ -1,51 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
-import {AppStateType, useTypedDispatch, useTypedSelector} from "./redux/reduxStore";
-import {
-    changePerson,
-    changeSex,
-    changeStatus, pushHumansFromStorrage,
-    recurce,
-    saveChanges,
-} from "./redux/reducers/drevoReducer";
-import {humanType} from "./Types/Types";
+import {humanType} from "../../Types/Types";
 
-function App() {
-    const dispatch = useTypedDispatch()
-    const {drevo, humans, person} = useTypedSelector((state: AppStateType) => state.drevo)
 
-    const [openSave, setOpenSave] = useState(false)
-    const [openSex, setOpenSex] = useState(false)
-    const [openStatus, setOpenStatus] = useState(false)
+interface AppProps {
+    humans: Array<humanType>
+    openStatus: boolean
+    openSex: boolean
+    openSave: boolean
+    setOpenSex: (a: boolean) => void
+    setOpenStatus: (a: boolean) => void
+    person: humanType
+    changePersonClick: (id: number) => void
+    saveChangesHandler: (id: number, humans: Array<humanType>) => void
+    changeStatusHandler: (status: string, id: number) => void
+    changeSexHandler: (status: string, id: number) => void
+}
 
-    useEffect(() => {
 
-        if (!localStorage.getItem("savedHumans")){
-            dispatch(recurce(drevo[0], 1))
-        } else {
-            dispatch(pushHumansFromStorrage( JSON.parse(localStorage.getItem("savedHumans") || "")))
-        }
-        dispatch(changePerson(1))
-    }, [])
+const App: React.FC<AppProps> = ({
+                                     humans, changePersonClick, person, saveChangesHandler,
+                                     openSave, setOpenStatus, changeStatusHandler,
+                                     setOpenSex, openSex, changeSexHandler, openStatus
+                                 }) => {
 
-    let changePersonClick = (id: number) => {
-        setOpenSex(false)
-        setOpenStatus(false)
-        dispatch(changePerson(id))
-    }
-    let saveChangesHandler = (id: number, humans: Array<humanType>) => {
-        dispatch(saveChanges(id))
-        localStorage.setItem("savedHumans", JSON.stringify(humans))
-    }
-
-    let changeSexHandler = (sex: string, id: number) => {
-        setOpenSave(true)
-        dispatch(changeSex(sex, id))
-    }
-    let changeStatusHandler = (status: string, id: number) => {
-        setOpenSave(true)
-        dispatch(changeStatus(status, id))
-    }
 
     return (
         <div className="App">
@@ -59,25 +37,27 @@ function App() {
             </div> : null}
             {!!person ? <div className="Svoistva">
                 {openSave ?
-                    <button onClick={() => saveChangesHandler(person.id, humans)}> Save Changes</button>
+                    <button onClick={() => saveChangesHandler(person.id, humans)} className='buttons'> Save
+                        Changes</button>
                     : null
                 }
 
-                <div>{person.name}</div>
-                <div>{person.age}</div>
-                <div onClick={() => setOpenStatus(true)}>{person.status}</div>
+                <div>Name - {person.name}</div>
+                <div>Age - {person.age}</div>
+                <div onClick={() => setOpenStatus(!openStatus)} className="StatusSex">Status - {person.status}</div>
                 {openStatus ?
                     <div className="dropdown-status">
-                        <button onClick={() => changeStatusHandler('dead', person.id)}>dead</button>
-                        <button onClick={() => changeStatusHandler('alive', person.id)}>alive</button>
+                        <button onClick={() => changeStatusHandler('dead', person.id)} className='buttons'>dead</button>
+                        <button onClick={() => changeStatusHandler('alive', person.id)} className='buttons'>alive
+                        </button>
                     </div> : null
                 }
 
-                <div onClick={() => setOpenSex(true)}> {person.sex}</div>
+                <div onClick={() => setOpenSex(!openSex)} className="StatusSex">Sex - {person.sex}</div>
                 {openSex ?
                     <div className="dropdown-sex">
-                        <button onClick={() => changeSexHandler('man', person.id)}>man</button>
-                        <button onClick={() => changeSexHandler('woman', person.id)}>woman</button>
+                        <button onClick={() => changeSexHandler('man', person.id)} className='buttons'>man</button>
+                        <button onClick={() => changeSexHandler('woman', person.id)} className='buttons'>woman</button>
                     </div> : null
                 }
 

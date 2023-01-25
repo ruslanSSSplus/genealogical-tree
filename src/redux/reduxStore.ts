@@ -1,14 +1,14 @@
 import {applyMiddleware, combineReducers, legacy_createStore as createStore, AnyAction} from "redux";
 import thunkMiddleware from 'redux-thunk'
 
-import catsReducer from "./reducers/catsReducer";
+import treeReducer from "./reducers/treeReducer";
 
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import  {ThunkDispatch } from 'redux-thunk';
 
 
 let rootReducer = combineReducers({
-    cats: catsReducer,
+    tree: treeReducer,
 })
 
 type RootReducersType = typeof rootReducer

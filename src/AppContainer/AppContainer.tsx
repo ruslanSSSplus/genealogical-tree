@@ -1,90 +1,66 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
-import {AppStateType, useTypedDispatch, useTypedSelector} from "../../redux/reduxStore";
+import {AppStateType, useTypedDispatch, useTypedSelector} from "../redux/reduxStore";
 import {
     changePerson,
     changeSex,
-    changeStatus, pushHumansFromStorrage,
-    recurce,
+    changeStatus,
+    pushHumansFromStorrage,
+    recursion,
     saveChanges,
-} from "../../redux/reducers/drevoReducer";
-import {humanType} from "../../Types/Types";
+} from "../redux/reducers/treeReducer";
+import {humanType} from "../Types/Types";
+import App from "./App/App";
 
 function AppContainer() {
     const dispatch = useTypedDispatch()
-    const {drevo, humans, person} = useTypedSelector((state: AppStateType) => state.drevo)
+    const {tree, humans, person} = useTypedSelector((state: AppStateType) => state.tree)
 
-    const [openSave, setOpenSave] = useState(false)
-    const [openSex, setOpenSex] = useState(false)
-    const [openStatus, setOpenStatus] = useState(false)
+    const [openSave, setOpenSave] = useState(false) // показываю или скрываю кнопку SAVE
+    const [openSex, setOpenSex] = useState(false) // показываю или скрываю кнопки Пола
+    const [openStatus, setOpenStatus] = useState(false) // показываю или скрываю кнопки Статуса
 
     useEffect(() => {
-
-        if (!localStorage.getItem("savedHumans")){
-            dispatch(recurce(drevo[0], 1))
+        //  localStorage.clear()
+        if (!localStorage.getItem("savedHumans"))  // проверяю сторедж на наличие массива
+        {
+            dispatch(recursion(tree[0], 1)) // если пустой, заполняю его
         } else {
-            dispatch(pushHumansFromStorrage( JSON.parse(localStorage.getItem("savedHumans") || "")))
+            dispatch(pushHumansFromStorrage(JSON.parse(localStorage.getItem("savedHumans") || ""))) // если полный, то беру его из стореджа
         }
-        dispatch(changePerson(1))
+        dispatch(changePerson(1)) // выставляю пользователя которого можно менять (правая часть экрана)
     }, [])
 
+
+    // функция для события сменя пользователя (юзер кликнул на кого-то)
     let changePersonClick = (id: number) => {
         setOpenSex(false)
         setOpenStatus(false)
         dispatch(changePerson(id))
     }
+    // функция для сохранения изменений в локал сторедж
     let saveChangesHandler = (id: number, humans: Array<humanType>) => {
         dispatch(saveChanges(id))
+        setOpenSex(false)
+        setOpenStatus(false)
+        setOpenSave(false)
         localStorage.setItem("savedHumans", JSON.stringify(humans))
     }
-
+    // меняем в массиве пользователей пол определенного пользователя
     let changeSexHandler = (sex: string, id: number) => {
         setOpenSave(true)
         dispatch(changeSex(sex, id))
     }
+    // меняем в массиве пользователей статус определенного пользователя
     let changeStatusHandler = (status: string, id: number) => {
         setOpenSave(true)
         dispatch(changeStatus(status, id))
     }
 
-    return (
-        <div className="App">
-            {!!humans ? <div className="Drevo">
-        {humans.map((item) => <div className={item.isChange ? `textChanged${item.lvl}` : `text${item.lvl}`}
-            onClick={() => changePersonClick(item.id)}
-    key={item.id}>
-        {item.name}
-        </div>
-)}
-    </div> : null}
-    {!!person ? <div className="Svoistva">
-        {openSave ?
-                <button onClick={() => saveChangesHandler(person.id, humans)}> Save Changes</button>
-    : null
-    }
+    return <App humans={humans} changePersonClick={changePersonClick} person={person}
+                saveChangesHandler={saveChangesHandler}
+                openSave={openSave} setOpenStatus={setOpenStatus} changeStatusHandler={changeStatusHandler}
+                setOpenSex={setOpenSex} openSex={openSex} changeSexHandler={changeSexHandler} openStatus={openStatus}/>
 
-        <div>{person.name}</div>
-        <div>{person.age}</div>
-        <div onClick={() => setOpenStatus(true)}>{person.status}</div>
-        {openStatus ?
-            <div className="dropdown-status">
-            <button onClick={() => changeStatusHandler('dead', person.id)}>dead</button>
-        <button onClick={() => changeStatusHandler('alive', person.id)}>alive</button>
-        </div> : null
-        }
-
-        <div onClick={() => setOpenSex(true)}> {person.sex}</div>
-        {openSex ?
-            <div className="dropdown-sex">
-            <button onClick={() => changeSexHandler('man', person.id)}>man</button>
-        <button onClick={() => changeSexHandler('woman', person.id)}>woman</button>
-        </div> : null
-        }
-
-        </div> : null
-    }
-    </div>
-);
 }
 
-    export default AppContainer;
+export default AppContainer;

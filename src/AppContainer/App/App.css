@@ -56,3 +56,26 @@
   border: solid 1px black;
   margin-left: 300px;
 }
+
+.Svoistva{
+  margin-top: 10vh;
+  font-size: 50px;
+}
+.StatusSex{
+  color: aqua;
+}
+.StatusSex:hover{
+  color: orange;
+  cursor: pointer;
+}
+.buttons{
+  font-size: 50px;
+  text-decoration: none;
+  border: solid 2px yellow;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.Drevo:hover{
+  cursor: pointer;
+}

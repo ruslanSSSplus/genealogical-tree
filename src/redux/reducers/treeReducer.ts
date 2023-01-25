@@ -2,16 +2,16 @@ import {InferActionsTypes} from "../reduxStore";
 import {Dispatch} from 'redux';
 import {humanType} from "../../Types/Types";
 
-const PUSH_HUMANS = 'DREVO/PUSH_HUMANS';
-const CHANGE_PERSON = 'DREVO/CHANGE_PERSON';
-const CHANGE_SEX = 'DREVO/CHANGE_SEX';
-const CHANGE_STATUS = 'DREVO/CHANGE_STATUS';
-const SAVE_CHANGES = 'DREVO/SAVE_CHANGES';
-const IS_CHANGE = 'DREVO/IS_CHANGE';
-const PUSH_HUMANS_FROM_STORAGE = 'DREVO/PUSH_HUMANS_FROM_STORAGE';
+const PUSH_HUMANS = 'TREE/PUSH_HUMANS';
+const CHANGE_PERSON = 'TREE/CHANGE_PERSON';
+const CHANGE_SEX = 'TREE/CHANGE_SEX';
+const CHANGE_STATUS = 'TREE/CHANGE_STATUS';
+const SAVE_CHANGES = 'TREE/SAVE_CHANGES';
+const IS_CHANGE = 'TREE/IS_CHANGE';
+const PUSH_HUMANS_FROM_STORAGE = 'TREE/PUSH_HUMANS_FROM_STORAGE';
 
 let initialState = {
-    drevo: [
+    tree: [
         {
             name: 'Ivan',
             age: 79,
@@ -110,7 +110,7 @@ export type initialStateType = typeof initialState
 
 type ActionsType = InferActionsTypes<typeof actions>
 
-const drevoReducer = (state = initialState, action: ActionsType): initialStateType => {
+const treeReducer = (state = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
 
         case PUSH_HUMANS:
@@ -118,7 +118,7 @@ const drevoReducer = (state = initialState, action: ActionsType): initialStateTy
         case CHANGE_PERSON:
             let newOne = state.humans.find(e => e.id === action.id);
             if (!newOne) {
-                newOne = state.drevo[0]
+                newOne = state.tree[0]
             }
             return {...state, person: newOne}
         case CHANGE_SEX:
@@ -229,4 +229,4 @@ export const actions = {
 }
 
 
-export default drevoReducer;
+export default treeReducer;
