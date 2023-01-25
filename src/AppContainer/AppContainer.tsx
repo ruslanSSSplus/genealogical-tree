@@ -3,7 +3,7 @@ import {AppStateType, useTypedDispatch, useTypedSelector} from "../redux/reduxSt
 import {
     changePerson,
     changeSex,
-    changeStatus,
+    changeStatus, clearHumans,
     pushHumansFromStorrage,
     recursion,
     saveChanges,
@@ -14,7 +14,6 @@ import App from "./App/App";
 const AppContainer = () => {
     const dispatch = useTypedDispatch()
     const {tree, humans, person} = useTypedSelector((state: AppStateType) => state.tree)
-    console.log(humans)
     const [openSave, setOpenSave] = useState(false) // показываю или скрываю кнопку SAVE
     const [openSex, setOpenSex] = useState(false) // показываю или скрываю кнопки Пола
     const [openStatus, setOpenStatus] = useState(false) // показываю или скрываю кнопки Статуса
@@ -55,11 +54,17 @@ const AppContainer = () => {
         setOpenSave(true)
         dispatch(changeStatus(status, id))
     }
+    // функция для очисти локал стореджа
+    let cleanData = () => {
+        dispatch(clearHumans()) // очищаем массив людей
+        dispatch(recursion(tree[0], 1)) // заполняем его заного из исходного массива
+        changePersonClick(person.id) // обновляем выбранного человека справа
+    }
 
     return <App humans={humans} changePersonClick={changePersonClick} person={person}
                 saveChangesHandler={saveChangesHandler}
                 openSave={openSave} setOpenStatus={setOpenStatus} changeStatusHandler={changeStatusHandler}
-                setOpenSex={setOpenSex} openSex={openSex} changeSexHandler={changeSexHandler} openStatus={openStatus}/>
+                setOpenSex={setOpenSex} openSex={openSex} changeSexHandler={changeSexHandler} openStatus={openStatus} cleanData={cleanData}/>
 
 }
 

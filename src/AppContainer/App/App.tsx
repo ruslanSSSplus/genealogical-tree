@@ -15,13 +15,14 @@ interface AppProps {
     saveChangesHandler: (id: number, humans: Array<humanType>) => void
     changeStatusHandler: (status: string, id: number) => void
     changeSexHandler: (status: string, id: number) => void
+    cleanData: () => void
 }
 
 
 const App: React.FC<AppProps> = ({
                                      humans, changePersonClick, person, saveChangesHandler,
                                      openSave, setOpenStatus, changeStatusHandler,
-                                     setOpenSex, openSex, changeSexHandler, openStatus
+                                     setOpenSex, openSex, changeSexHandler, openStatus, cleanData
                                  }) => {
 
 
@@ -37,6 +38,7 @@ const App: React.FC<AppProps> = ({
                         {item.name}
                     </div>
                 )}
+                <button className='buttons' onClick={() => cleanData()}> Очистить localStorage</button>
             </div> : null}
             {!!person ? <div className="Svoistva">
                 {openSave ?

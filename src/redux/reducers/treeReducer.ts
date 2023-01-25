@@ -9,6 +9,7 @@ const CHANGE_STATUS = 'TREE/CHANGE_STATUS';
 const SAVE_CHANGES = 'TREE/SAVE_CHANGES';
 const IS_CHANGE = 'TREE/IS_CHANGE';
 const PUSH_HUMANS_FROM_STORAGE = 'TREE/PUSH_HUMANS_FROM_STORAGE';
+const CLEAR_HUMANS = 'TREE/CLEAR_HUMANS';
 
 let initialState = {
     tree: [
@@ -179,6 +180,8 @@ const treeReducer = (state = initialState, action: ActionsType): initialStateTyp
             }
         case PUSH_HUMANS_FROM_STORAGE:
             return {...state, humans: action.humans}
+        case CLEAR_HUMANS:
+            return {...state, humans: []}
         default:
             return state;
     }
@@ -186,13 +189,14 @@ const treeReducer = (state = initialState, action: ActionsType): initialStateTyp
 // в этой функции мы пробегаемся по всему массиву древо, включая вложенные обьекты и тд
 export const recursion = (human: humanType, lvl: number) => {
     return (dispatch: Dispatch) => {
-        human.lvl = lvl // это я добавил, чтоб понимать какой по счету человек в роду, чем больше лвл, тем правее он в дереве
-        human.isChange = false // это добавил чтоб понимать какого пользователя изменили, но не сохранили
-        dispatch(actions.pushNewHuman(human))
-        if (!!human.children) {
-            for (let i = 0; i < human.children.length; i++) {
+        let humanCopy = {...human}
+        humanCopy.lvl = lvl // это я добавил, чтоб понимать какой по счету человек в роду, чем больше лвл, тем правее он в дереве
+        humanCopy.isChange = false // это добавил чтоб понимать какого пользователя изменили, но не сохранили
+        dispatch(actions.pushNewHuman(humanCopy))
+        if (!!humanCopy.children) {
+            for (let i = 0; i < humanCopy.children.length; i++) {
                 // @ts-ignore
-                dispatch(recursion(human.children[i], lvl + 1))
+                dispatch(recursion(humanCopy.children[i], lvl + 1))
             }
         }
     }
@@ -231,6 +235,12 @@ export const pushHumansFromStorrage = () => {
         dispatch(actions.pushHumansFromStorrage(JSON.parse(localStorage.getItem("savedHumans") || "")))
     }
 }
+export const clearHumans = () => {
+    return (dispatch: Dispatch) => {
+        localStorage.clear()
+        dispatch(actions.clearHumans())
+    }
+}
 
 export const actions = {
     pushNewHuman: (human: humanType) => ({
@@ -253,6 +263,9 @@ export const actions = {
     } as const),
     pushHumansFromStorrage: (humans: Array<humanType>) => ({
         type: PUSH_HUMANS_FROM_STORAGE, humans,
+    } as const),
+    clearHumans: () => ({
+        type: CLEAR_HUMANS,
     } as const),
 }
 
