@@ -25,7 +25,7 @@ const AppContainer = () => {
         {
             dispatch(recursion(tree[0], 1)) // если пустой, заполняю его
         } else {
-            dispatch(pushHumansFromStorrage(JSON.parse(localStorage.getItem("savedHumans") || ""))) // если полный, то беру его из стореджа
+            dispatch(pushHumansFromStorrage()) // если полный, то беру его из стореджа
         }
         dispatch(changePerson(1)) // выставляю пользователя которого можно менять (правая часть экрана)
     }, [])

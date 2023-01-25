@@ -226,9 +226,9 @@ export const isChange = (id: number) => {
     }
 }
 
-export const pushHumansFromStorrage = (humans: Array<humanType>) => {
+export const pushHumansFromStorrage = () => {
     return (dispatch: Dispatch) => {
-        dispatch(actions.pushHumansFromStorrage(humans))
+        dispatch(actions.pushHumansFromStorrage(JSON.parse(localStorage.getItem("savedHumans") || "")))
     }
 }
 
