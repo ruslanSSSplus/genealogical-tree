@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/genealogical-tree/static/css/main.9b7d781c.css",
+    "main.js": "/genealogical-tree/static/js/main.a366b5c2.js",
+    "static/js/787.28cb0dcd.chunk.js": "/genealogical-tree/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/genealogical-tree/index.html",
+    "main.9b7d781c.css.map": "/genealogical-tree/static/css/main.9b7d781c.css.map",
+    "main.a366b5c2.js.map": "/genealogical-tree/static/js/main.a366b5c2.js.map",
+    "787.28cb0dcd.chunk.js.map": "/genealogical-tree/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9b7d781c.css",
+    "static/js/main.a366b5c2.js"
+  ]
+}
