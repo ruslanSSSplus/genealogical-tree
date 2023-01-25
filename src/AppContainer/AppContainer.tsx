@@ -11,16 +11,16 @@ import {
 import {humanType} from "../Types/Types";
 import App from "./App/App";
 
-function AppContainer() {
+const AppContainer = () => {
     const dispatch = useTypedDispatch()
     const {tree, humans, person} = useTypedSelector((state: AppStateType) => state.tree)
-
+    console.log(humans)
     const [openSave, setOpenSave] = useState(false) // показываю или скрываю кнопку SAVE
     const [openSex, setOpenSex] = useState(false) // показываю или скрываю кнопки Пола
     const [openStatus, setOpenStatus] = useState(false) // показываю или скрываю кнопки Статуса
 
     useEffect(() => {
-        //  localStorage.clear()
+         // localStorage.clear()
         if (!localStorage.getItem("savedHumans"))  // проверяю сторедж на наличие массива
         {
             dispatch(recursion(tree[0], 1)) // если пустой, заполняю его

@@ -39,6 +39,13 @@ let initialState = {
                                     sex: 'woman',
                                     status: 'alive',
                                     id: 6,
+                                },
+                                {
+                                    name: 'Nicola',
+                                    age: 8,
+                                    sex: 'man',
+                                    status: 'alive',
+                                    id: 11,
                                 }
                             ]
                         },
@@ -69,24 +76,45 @@ let initialState = {
                     children: [
                         {
                             name: 'Vitalia',
-                            age: 16,
+                            age: 26,
                             sex: 'man',
                             status: 'alive',
                             id: 5,
+                            children: [{
+                                name: 'Max',
+                                age: 8,
+                                sex: 'man',
+                                status: 'alive',
+                                id: 13,
+                            }]
                         },
                         {
                             name: 'Sergey',
-                            age: 30,
+                            age: 37,
                             sex: 'man',
                             status: 'alive',
                             id: 9,
                             children: [
                                 {
                                     name: 'Sasha',
-                                    age: 10,
+                                    age: 22,
                                     sex: 'man',
                                     status: 'alive',
                                     id: 10,
+                                    children: [{
+                                        name: 'Danya',
+                                        age: 2,
+                                        sex: 'man',
+                                        status: 'alive',
+                                        id: 14,
+                                    }]
+                                },
+                                {
+                                    name: 'Vova',
+                                    age: 18,
+                                    sex: 'man',
+                                    status: 'alive',
+                                    id: 12,
                                 }
                             ]
                         }

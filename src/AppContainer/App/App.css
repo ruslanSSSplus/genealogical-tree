@@ -1,60 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+
 .App {
   text-align: center;
   display: grid;
   width: 100%;
   height: 100%;
   grid-template-columns: 1fr 1fr;
+  font-family: 'Raleway', sans-serif;
 }
 
 .Drevo{
+  font-size: 30px;
   margin-top: 10vh;
 }
 
 
 .text1{
   border: solid 1px black;
-  width: 100px;
+  width: 150px;
   margin-left: 0px;
 }
 .text2{
-  width: 100px;
+  width: 150px;
   border: solid 1px black;
-  margin-left: 100px;
+  margin-left: 150px;
 }
 .text3{
-  width: 100px;
-  border: solid 1px black;
-  margin-left: 200px;
-}
-.text4{
-  width: 100px;
+  width: 150px;
   border: solid 1px black;
   margin-left: 300px;
+}
+.text4{
+  width: 150px;
+  border: solid 1px black;
+  margin-left: 450px;
+}
+.text5{
+  width: 150px;
+  border: solid 1px black;
+  margin-left: 600px;
 }
 
 .textChanged1{
   background-color: yellow;
   border: solid 1px black;
-  width: 100px;
+  width: 150px;
   margin-left: 0px;
 }
 .textChanged2{
   background-color: yellow;
-  width: 100px;
+  width: 150px;
   border: solid 1px black;
-  margin-left: 100px;
+  margin-left: 150px;
 }
 .textChanged3{
   background-color: yellow;
-  width: 100px;
+  width: 150px;
   border: solid 1px black;
-  margin-left: 200px;
+  margin-left: 300px;
 }
 .textChanged4{
   background-color: yellow;
-  width: 100px;
+  width: 150px;
   border: solid 1px black;
-  margin-left: 300px;
+  margin-left: 450px;
+}
+.textChanged5{
+  background-color: yellow;
+  width: 150px;
+  border: solid 1px black;
+  margin-left: 600px;
 }
 
 .Svoistva{

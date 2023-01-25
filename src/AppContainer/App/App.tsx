@@ -28,6 +28,9 @@ const App: React.FC<AppProps> = ({
     return (
         <div className="App">
             {!!humans ? <div className="Drevo">
+                <p>
+                    Правее и ниже, показаны дети человека, левее и выше родитель
+                </p>
                 {humans.map((item) => <div className={item.isChange ? `textChanged${item.lvl}` : `text${item.lvl}`}
                                            onClick={() => changePersonClick(item.id)}
                                            key={item.id}>
@@ -41,7 +44,7 @@ const App: React.FC<AppProps> = ({
                         Changes</button>
                     : null
                 }
-
+                <div> Статус и пол можно изменить</div>
                 <div>Name - {person.name}</div>
                 <div>Age - {person.age}</div>
                 <div onClick={() => setOpenStatus(!openStatus)} className="StatusSex">Status - {person.status}</div>
