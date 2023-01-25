@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/genealogical-tree/static/css/main.3f423efe.css",
-    "main.js": "/genealogical-tree/static/js/main.bae65511.js",
+    "main.css": "/genealogical-tree/static/css/main.75b0d6a6.css",
+    "main.js": "/genealogical-tree/static/js/main.ba21f293.js",
     "static/js/787.28cb0dcd.chunk.js": "/genealogical-tree/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/genealogical-tree/index.html",
-    "main.3f423efe.css.map": "/genealogical-tree/static/css/main.3f423efe.css.map",
-    "main.bae65511.js.map": "/genealogical-tree/static/js/main.bae65511.js.map",
+    "main.75b0d6a6.css.map": "/genealogical-tree/static/css/main.75b0d6a6.css.map",
+    "main.ba21f293.js.map": "/genealogical-tree/static/js/main.ba21f293.js.map",
     "787.28cb0dcd.chunk.js.map": "/genealogical-tree/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3f423efe.css",
-    "static/js/main.bae65511.js"
+    "static/css/main.75b0d6a6.css",
+    "static/js/main.ba21f293.js"
   ]
 }
